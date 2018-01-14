@@ -1,24 +1,16 @@
 
-  $('form').on('submit', function(event){
-    event.preventDefault();
-    var item_value = $('#list_item_input').val();
-    var item_obj = {item_value: item_value, completed: false}
-    $('#list_item_input').val('');
-    addListItem(item_obj);
-
-  })
 
 
 /////////////////////////////////////////////
 
 function addListItem(item) {
   listItems.push(item)
-  renderArray();
+  renderArray(listItems);
 }
 
 function removeListItem(index) {
   listItems.splice(index, 1)
-  renderArray();
+  renderArray(listItems);
 }
 
 function shiftUpItem(index) {
@@ -27,7 +19,7 @@ function shiftUpItem(index) {
   } else {
     var temp = listItems.splice(index, 1)
     listItems.splice(index-1, 0, temp[0])
-    renderArray();
+    renderArray(listItems);
   }
 }
 
@@ -37,14 +29,14 @@ function shiftDownItem(index) {
   } else {
     var temp = listItems.splice(index, 1)
     listItems.splice(index+1, 0, temp[0])
-    renderArray();
+    renderArray(listItems);
   }
 }
 
 function completeItem(index) {
   listItems[index].completed = !listItems[index].completed;
   console.log(listItems[index].completed)
-  renderArray();
+  renderArray(listItems);
 }
 
 function renderArray() {
@@ -84,3 +76,4 @@ function renderArray() {
         })
     })
 }
+module.exports = addListItem
